@@ -1,0 +1,33 @@
+@import "../../../../best-practices/reset";
+
+
+font-face {
+  font-family: Montserrat;
+  src:url("../fonts/Montserrat-Regular.ttf");
+}
+
+body {
+  font-family: Montserrat;
+}
+
+.container {
+  width: 100%;
+  max-width: 1130px;
+  padding:0 15px;
+  margin: 0 auto;
+}
+
+.icons {
+  display: none;
+}
+
+.main-app {
+  background-color: white;
+  &__nav {
+    padding:20px 0;
+  }
+
+  &__topbar {
+    padding:50px 0;
+  }
+}

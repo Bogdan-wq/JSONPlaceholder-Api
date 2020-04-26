@@ -1,0 +1,58 @@
+.render-base {
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 40px;
+    grid-row-gap: 20px;
+  }
+}
+
+
+
+//Render-base-item
+.render-base-item {
+  border-radius: 6px;
+  border:1px solid black;
+  display: grid;
+  grid-row-gap: 15px;
+  padding:20px 30px;
+
+  &__ids {
+    display: flex;
+    span:nth-child(2) {
+      margin-left:30px;
+    }
+  }
+
+  &__buttons {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: end;
+    grid-column-gap: 20px;
+    justify-items: center;
+  }
+}
+
+
+//Buttons
+.buttons {
+  &__item {
+    background-color: transparent;
+    cursor: pointer;
+  }
+  &__icon {
+    width:50px;
+    height:35px;
+
+    &_red {
+      fill:red;
+    }
+
+    &_green {
+      fill:darkgreen;
+    }
+  }
+}
+
+
+

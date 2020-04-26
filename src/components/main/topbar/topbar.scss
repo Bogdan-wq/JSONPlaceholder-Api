@@ -1,0 +1,44 @@
+.topbar {
+
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 35% auto;
+    justify-content: space-between;
+  }
+
+
+  &__search input , &__addbutton {
+    border-radius: 5px;
+  }
+
+
+  &__search {
+    input {
+      width:100%;
+      height:100%;
+      padding:10px 1.5rem;
+      font-size:18px;
+      border: 1px solid dimgray;
+      &::-webkit-input-placeholder {
+        font-family: Montserrat;
+      }
+    }
+  }
+
+
+  &__addbutton {
+    padding:0 40px;
+    background-color: white;
+    border:1px solid dimgray;
+    cursor: pointer;
+    font-family: Montserrat;
+    font-size: 18px;
+    color:dimgray;
+
+    &:hover {
+      color:white;
+      background-color: dimgray;
+    }
+  }
+}
