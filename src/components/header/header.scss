@@ -1,5 +1,4 @@
 .header {
-  position: fixed;
   top:0;
   left:0;
   right:0;
@@ -9,13 +8,10 @@
 
   &__wrapper {
     height: 100vh;
-    position: relative;
-    color:white;
   }
 
 
   &__background {
-    position: absolute;
     z-index:2;
     top:0;
     left:0;
@@ -35,8 +31,6 @@
     }
 
     img {
-      width:100%;
-      height:100%;
       object-fit: cover;
     }
   }
@@ -45,12 +39,10 @@
     height:100vh;
     display: grid;
     grid-template-columns: 1fr;
-    position: relative;
     z-index:5;
     align-content: center;
     justify-items: center;
     grid-row-gap: 20px;
-    text-align: center;
   }
 
   &__title {
@@ -59,13 +51,7 @@
   }
 
   &__info {
-    display: flex;
-    flex-direction: column;
     font-size: 22px;
-
-    span:nth-child(2) {
-      margin-top: 12px;
-    }
   }
 }
 
@@ -73,7 +59,5 @@
 
 .parallax {
   height: 100vh;
-  background-color:transparent;
-  position: relative;
   z-index:2;
 }

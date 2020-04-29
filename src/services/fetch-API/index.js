@@ -1,3 +1,3 @@
-import fetch from "./fetch-API";
+import FetchService from "./fetch-API";
 
-export default fetch;
+export default FetchService;

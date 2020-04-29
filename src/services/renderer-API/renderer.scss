@@ -1,0 +1,11 @@
+
+//Image-container
+.image-container {
+  padding-top:60%;
+
+  img {
+    top:0;
+    left:0;
+    object-fit: cover;
+  }
+}

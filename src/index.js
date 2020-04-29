@@ -1,7 +1,9 @@
-import React,{Fragment} from 'react';
+import React,{Fragment,Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import './general-styles/general.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import Header from "./components/header";
 import Main from "./components/main";
@@ -11,14 +13,17 @@ import Main from "./components/main";
 
 
 
-const App = () => {
-    return (
-        <Fragment>
-            <Header />
-            <Main />
-        </Fragment>
+class App extends Component {
 
-    )
+
+    render() {
+        return (
+            <Fragment>
+                <Header />
+                <Main />
+            </Fragment>
+        )
+    }
 };
 
 

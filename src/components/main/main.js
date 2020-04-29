@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
-import Nav from "./nav";
-import TopBar from "./topbar";
+import SearchPanel from "./search-panel";
 import RenderBase from "./render-base";
 import FetchService from "../../services/fetch-API";
+import Togglers from "./togglers";
+import './main.scss'
 
 
 
@@ -12,11 +13,38 @@ export default class Main extends Component {
 
        state = {
             base:null,
-            type:''
+            type:'',
+            loading:true,
+            error:false,
        }
 
 
        fetchService = new FetchService();
+
+
+       fetchData = (type,id = "") => {
+           let term = id ? `${type === `photos/?albumId=1` ? `photos` : type}?id=${id}` : `${type}`;
+           this.setState({
+               base:null,
+               loading:true
+           })
+           return this.fetchService.getData(`/${term}`)
+               .then((body) => {
+                   this.setState({
+                       base:body,
+                       type:type,
+                       loading:false
+                   })
+               })
+               .catch(() => {
+                    this.setState({
+                        error:true,
+                        loading:false
+                    })
+               })
+       }
+
+
 
 
        toggleType = (type) => {
@@ -24,21 +52,29 @@ export default class Main extends Component {
                return;
            }
            else {
-               this.fetchService.getData(`/${type}`)
-                   .then((body) => {
-                       console.log(body);
-                       this.setState({
-                           base:body,
-                           type:type
-                       })
-                   })
+                this.fetchData(type)
            }
        }
 
 
 
+
+
+       searchById = (id) => {
+           const {type} = this.state;
+           if (!id) {
+               this.fetchData(type)
+           } else {
+                this.fetchData(type,id);
+           }
+       }
+
+
+
+
+
        componentDidMount() {
-            this.toggleType('users')
+           this.fetchData('todos');
        }
 
 
@@ -47,16 +83,37 @@ export default class Main extends Component {
 
     render() {
 
-        const { base,type } = this.state;
+        const { base,type,loading,error} = this.state;
+
+
 
 
         return (
-            <main className="main-app">
-                <div className="main-app__inner">
-                    <Nav toggleType={this.toggleType}/>
-                    <TopBar />
-                    <RenderBase base={base} type={type}/>
+            <main className="bg-white main d-flex flex-column position-sticky">
+                <div className="pt-4 pb-4">
+                    <div className="container-lg">
+                        <div className="d-flex justify-content-between">
+                            <SearchPanel
+                                searchById={this.searchById}
+                                error={error}/>
+                            <Togglers
+                                toggleType={this.toggleType}
+                                type={type}
+                                loading={loading}
+                                error={error}/>
+                        </div>
+                    </div>
                 </div>
+                <div className="pt-2 pb-2">
+                    <div className="container-lg">
+                        <span className="note"><strong>Note: </strong>If it is loading for a long time,reload the app till it is operating good</span>
+                    </div>
+                </div>
+                <RenderBase
+                    base={base}
+                    type={type}
+                    loading={loading}
+                    error={error}/>
             </main>
         )
     }
