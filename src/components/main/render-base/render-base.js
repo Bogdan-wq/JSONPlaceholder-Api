@@ -11,7 +11,7 @@ export default class RenderBase extends Component {
         renderer = new Renderer();
 
         toJSX = () => {
-            const { type , base } = this.props;
+            const { state : {type , base}  } = this.props;
             const {
                 usersToHTML,todosToHTML,postsToHTML,albumsToHTML,photosToHTML,commentsToHTML
             } = this.renderer;
@@ -36,14 +36,19 @@ export default class RenderBase extends Component {
 
 
         render() {
-            const { base,loading,error } = this.props;
+            const { state : {base,loading,error} } = this.props;
 
 
-            const Loading = loading && !base && !error ? <Spinner />: null;
+            const Loading = loading && !error ? <Spinner />: null;
 
-            const JSXarray = base && !loading && !error ? this.toJSX() : null;
+            const ErrorMessage = !loading && error ? <ErrorIndicator /> : null;
 
-            const ErrorMessage = !base && !loading && error ? <ErrorIndicator /> : null;
+            const JSXarray = !loading && !error && base.length !== 0 ? this.toJSX() : null;
+
+            const NothingMatched = base && base.length === 0  ? <div className="note">No items matched</div> : null;
+
+
+
 
             return (
                 <div className="pt-4 flex-grow-1 overflow-auto">
@@ -51,6 +56,7 @@ export default class RenderBase extends Component {
                         {Loading}
                         {JSXarray}
                         {ErrorMessage}
+                        {NothingMatched}
                     </div>
                 </div>
             )
