@@ -83,13 +83,9 @@ export default class Main extends Component {
 
     render() {
 
-        const { type,loading,error} = this.state;
+        const { base,type,loading,error} = this.state;
 
-        const stateForTogglers = {
-            type,
-            loading,
-            error
-        }
+
 
 
         return (
@@ -102,7 +98,9 @@ export default class Main extends Component {
                                 error={error}/>
                             <Togglers
                                 toggleType={this.toggleType}
-                                state={stateForTogglers}/>
+                                type={type}
+                                loading={loading}
+                                error={error}/>
                         </div>
                     </div>
                 </div>
@@ -111,7 +109,11 @@ export default class Main extends Component {
                         <span className="note"><strong>Note: </strong>If it is loading for a long time,reload the app till it is operating good</span>
                     </div>
                 </div>
-                <RenderBase state={this.state}/>
+                <RenderBase
+                    base={base}
+                    type={type}
+                    loading={loading}
+                    error={error}/>
             </main>
         )
     }

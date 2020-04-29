@@ -18,10 +18,9 @@ export default class Togglers extends Component {
 
         const buttons = this.buttons.map(({label,url}) => {
 
-            const {state : {loading,error,type}} = this.props;
+            const isActive = this.props.type === url;
 
-            const isActive = type === url;
-
+            const {loading,error} = this.props;
 
             const isDisabled = loading || error;
 
