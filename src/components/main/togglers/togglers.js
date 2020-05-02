@@ -36,7 +36,7 @@ export default class Togglers extends Component {
         })
 
         return  (
-            <div className="btn-group btn-group-lg">
+            <div className="btn-group btn-group-lg mt-3 mt-lg-0 d-flex flex-column flex-sm-row">
                 {buttons}
             </div>
         )

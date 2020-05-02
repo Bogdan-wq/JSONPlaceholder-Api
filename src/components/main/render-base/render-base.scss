@@ -4,13 +4,31 @@
 
   &_thrcol {
     grid-template-columns: 1fr 1fr 1fr;
+    @media screen and (max-width: 875px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media screen and (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &_twocol {
     grid-template-columns: 1fr 1fr;
+    @media screen and (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &_fourcol {
     grid-template-columns: repeat(4,1fr);
+    @media screen and (max-width: 875px) {
+      grid-template-columns: repeat(3,1fr);
+    }
+    @media screen and (max-width: 700px) {
+      grid-template-columns: repeat(2,1fr);
+    }
+    @media screen and (max-width: 485px) {
+      grid-template-columns: 1fr;
+    }
   }
  }

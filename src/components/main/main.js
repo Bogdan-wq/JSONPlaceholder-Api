@@ -96,7 +96,7 @@ export default class Main extends Component {
             <main className="bg-white main d-flex flex-column position-sticky">
                 <div className="pt-4 pb-4">
                     <div className="container-lg">
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between flex-column flex-lg-row">
                             <SearchPanel
                                 searchById={this.searchById}
                                 error={error}/>
