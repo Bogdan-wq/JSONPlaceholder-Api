@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import Renderer from "../../../services/renderer-API";
 import './render-base.scss';
-import Spinner from "../../spinner";
-import ErrorIndicator from "../../errorindicator";
+
 
 
 
@@ -11,7 +10,7 @@ export default class RenderBase extends Component {
         renderer = new Renderer();
 
         toJSX = () => {
-            const { state: {type , base} } = this.props;
+            const { type, base } = this.props;
             const {
                 usersToHTML,todosToHTML,postsToHTML,albumsToHTML,photosToHTML,commentsToHTML
             } = this.renderer;
@@ -36,24 +35,14 @@ export default class RenderBase extends Component {
 
 
         render() {
-            const { state : {base,loading,error} } = this.props;
+            const { base }  = this.props;
 
-
-            const Loading = loading && !error ? <Spinner />: null;
-
-            const JSXarray = !loading && !error ? this.toJSX() : null;
-
-            const ErrorMessage = !loading && error ? <ErrorIndicator /> : null;
-
-            const NothingMatched = base && base.length === 0 ? <div className="note">No items matched</div> : null
+            const nothingMatchedOrContent = base.length === 0 ? <div className="note">No items matched</div> : this.toJSX()
 
             return (
                 <div className="pt-4 flex-grow-1 overflow-auto">
                     <div className="container-lg h-100">
-                        {Loading}
-                        {JSXarray}
-                        {ErrorMessage}
-                        {NothingMatched}
+                        {nothingMatchedOrContent}
                     </div>
                 </div>
             )

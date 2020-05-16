@@ -18,19 +18,16 @@ export default class Togglers extends Component {
 
         const buttons = this.buttons.map(({label,url}) => {
 
-            const {state : {loading,error,type}} = this.props;
+            const { type } = this.props;
 
             const isActive = type === url;
-
-            const isDisabled = loading || error;
 
             const clazz = isActive ? 'btn-secondary' : 'btn-outline-secondary';
             return (
                 <button type="button"
                         key={label}
                         className={`btn ${clazz}`}
-                        onClick={() => this.props.toggleType(url)}
-                        disabled={isDisabled}>
+                        onClick={() => this.props.toggleType(url)}>
                     {label}</button>
             )
         })

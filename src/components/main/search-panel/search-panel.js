@@ -22,8 +22,7 @@ export default class SearchPanel extends Component  {
                    className="form-control-lg border border-dark col-12 col-sm-5 col-lg-4"
                    placeholder="Search by id..."
                    onChange={this.searchChange}
-                   value={this.state.id}
-                   disabled={this.props.error}/>
+                   value={this.state.id}/>
         )
     }
 }

@@ -3,7 +3,11 @@ import SearchPanel from "./search-panel";
 import RenderBase from "./render-base";
 import FetchService from "../../services/fetch-API";
 import Togglers from "./togglers";
+import Note from "./note";
+import Spinner from "../spinner";
+import ErrorIndicator from "../errorindicator";
 import './main.scss'
+
 
 
 
@@ -14,8 +18,8 @@ export default class Main extends Component {
        state = {
             base:null,
             type:'',
-            loading:true,
             error:false,
+            id:''
        }
 
 
@@ -26,20 +30,20 @@ export default class Main extends Component {
            let term = id ? `${type === `photos/?albumId=1` ? `photos` : type}?id=${id}` : `${type}`;
            this.setState({
                base:null,
-               loading:true
+               type:''
            })
            return this.fetchService.getData(`/${term}`)
                .then((body) => {
                    this.setState({
                        base:body,
                        type:type,
-                       loading:false
                    })
                })
                .catch(() => {
                     this.setState({
                         error:true,
-                        loading:false
+                        base:null,
+                        type:''
                     })
                })
        }
@@ -48,11 +52,12 @@ export default class Main extends Component {
 
 
        toggleType = (type) => {
+           const { id } = this.state;
            if(type === this.state.type) {
                return;
            }
            else {
-                this.fetchData(type)
+                this.fetchData(type,id)
            }
        }
 
@@ -62,10 +67,11 @@ export default class Main extends Component {
 
        searchById = (id) => {
            const {type} = this.state;
+           this.setState({ id })
            if (!id) {
                this.fetchData(type)
            } else {
-                this.fetchData(type,id);
+               this.fetchData(type,id);
            }
        }
 
@@ -83,13 +89,13 @@ export default class Main extends Component {
 
     render() {
 
-        const {type,loading,error} = this.state;
+        const {type,error,base} = this.state;
 
-        const stateForTogglers = {
-            type,
-            loading,
-            error
-        }
+        const content = base && !error ? <RenderBase base={base} type={type}/> : null;
+
+        const spinner = !base && !error ? <Spinner /> : null;
+
+        const errorIndicator = !base && error ? <ErrorIndicator /> : null;
 
 
         return (
@@ -97,21 +103,15 @@ export default class Main extends Component {
                 <div className="pt-4 pb-4">
                     <div className="container-lg">
                         <div className="d-flex justify-content-between flex-column flex-lg-row">
-                            <SearchPanel
-                                searchById={this.searchById}
-                                error={error}/>
-                            <Togglers
-                                toggleType={this.toggleType}
-                                state={stateForTogglers}/>
+                            <SearchPanel searchById={this.searchById}/>
+                            <Togglers toggleType={this.toggleType} type={type}/>
                         </div>
                     </div>
                 </div>
-                <div className="pt-2 pb-2">
-                    <div className="container-lg">
-                        <span className="note"><strong>Note: </strong>If it is loading for a long time,reload the app till it is operating good</span>
-                    </div>
-                </div>
-                <RenderBase state={this.state}/>
+                <Note/>
+                {content}
+                {spinner}
+                {errorIndicator}
             </main>
         )
     }
