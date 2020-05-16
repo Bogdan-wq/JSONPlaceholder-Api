@@ -6,7 +6,7 @@ import Togglers from "./togglers";
 import Note from "./note";
 import Spinner from "../spinner";
 import ErrorIndicator from "../errorindicator";
-import './main.scss'
+import './main.scss';
 
 
 
@@ -82,6 +82,7 @@ export default class Main extends Component {
        componentDidMount() {
            this.fetchData('todos');
        }
+
 
 
 
