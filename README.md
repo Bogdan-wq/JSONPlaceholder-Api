@@ -1,1 +1,1 @@
-# JSONPlaceholder-Api
+# json-placeholder-Api
